@@ -1,0 +1,230 @@
+<div class="container-fluid">
+  <div class="row question-row">
+    <div class="col-md-12 content-sec-other offset-md-2">
+      <div class="col-md-12">
+        <h2 class="user-heading">Reject Submissions</h2>
+        <!-- <span class="field_mandate" style="color: #F00"></span><span class="field_mandatory"> All fields are
+          mandatory</span> -->
+        <div id="mymain" class="container-fluid min-height-wrap">
+          <div class="selection row col-md-12" style="margin-top: 30px">
+
+
+
+            <div class="select-container   col-md-3 ">
+              <div id="selectPrograme" class="input-group">
+                <input type="text" placeholder="Program Name" id="program" class="form-control not-visible-input"
+                  name="program" readonly="" [(ngModel)]="selectedProgram"
+                  oninvalid="this.setCustomValidity('Please select Program Type')">
+                <div class="input-group-btn" style="position: relative;">
+                  <button data-toggle="dropdown" [disabled]='programList.length==1' class="btn btn-color " type="button"
+                    style="margin-top: 0px;">
+                    <i class="fa fa-list"></i>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" [ngStyle]="{'width.px': getWidth('selectPrograme')}">
+                    <li class="dropdown-item" *ngFor="let program of programList" (click)="selectProgram(program)">
+                      {{program}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="select-container   col-md-3 ">
+              <div id="selectFacilityType" class="input-group">
+                <input type="text" placeholder="Facility Type" id="facilityType" class="form-control not-visible-input"
+                  name="facilityType" readonly="" [(ngModel)]="selectedArea.areaLevelName"
+                  oninvalid="this.setCustomValidity('Please select Facility Type')">
+                <div class="input-group-btn" style="position: relative;">
+                  <button data-toggle="dropdown" [disabled]="!selectedProgram" class="btn btn-color " type="button"
+                    style="margin-top: 0px;">
+                    <i class="fa fa-list"></i>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" [ngStyle]="{'width.px': getWidth('selectFacilityType')}">
+                    <li class="dropdown-item" *ngFor="let facilityType of selectedDistrictFacility"
+                      (click)="selectFacilityType(facilityType)">{{facilityType.areaLevelModel.areaLevelName}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="select-container dist-list   col-md-3 ">
+              <div id="selectDistrict" class="input-group">
+                <input type="text" placeholder="Districts" id="Dist" class="form-control not-visible-input" name="Dist"
+                  readonly="" [(ngModel)]="selectedDistrict.areaName">
+                <div class="input-group-btn" style="position: relative;">
+                  <button data-toggle="dropdown" [disabled]="!selectedState.areaName" class="btn btn-color "
+                    type="button" style="margin-top: 0px;">
+                    <i class="fa fa-list"></i>
+                  </button>
+                  <ul class="dropdown-menu" [ngStyle]="{'width.px': getWidth('selectDistrict')}" role="menu">
+                    <li class="dropdown-item" *ngFor="let district of fipDistricts" (click)="selectDistrict(district)">
+                      {{district.areaName}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- <div class="select-container   col-md-3">
+              <div id="selectFacilityName" class="input-group">
+                <input type="text" placeholder="Facility Name" id="facilityName" class="form-control not-visible-input"
+                  name="facilityName" readonly="" [(ngModel)]="selectedFacility.facilityName"
+                  oninvalid="this.setCustomValidity('Please select Facility Type')">
+                <div class="input-group-btn" style="position: relative;">
+                  <button data-toggle="dropdown" [disabled]="!selectedDistrict.areaName && !selectedArea.areaLevelName"
+                    class="btn btn-color " type="button" style="margin-top: 0px;">
+                    <i class="fa fa-list"></i>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" [ngStyle]="{'width.px': getWidth('selectFacilityName')}">
+                    <li class="dropdown-item" *ngFor="let facility of facilityList" (click)="selectFacility(facility)">
+                      {{facility.facilityName}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div> -->
+
+
+
+            <div class=" col-md-3 text-center" style="margin-top: -23px;">
+              <button type="submit" (click)="getTable()" class="submit-selection" style="margin-top: 0px;">SHOW</button>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="errorMessage" role="dialog" style="margin-top: 12%;">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content modal-info">
+          <div class="modal-header" style="background-color: #2f515b; color: #fff;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <!-- <h4 class="modal-title" style="text-align: center;">Error</h4> -->
+          </div>
+          <div class="modal-body">
+            <p style="text-align: center; font-size: 20px; margin-bottom: -10px;">
+              Please select the {{errorMsg}}</p>
+          </div>
+          <div class="modal-footer" style="text-align: center;">
+            <button type="button" class="btn btn-default btn-view text-center" data-dismiss="modal"
+              style="background-color: #2f515b;">Ok</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="infoMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+      data-backdrop="static">
+      <div class="modal-dialog modal-notify modal-error" role="document">
+        <!--Content-->
+        <div class="modal-content">
+          <!--Header-->
+          <div class="modal-header">
+            <p class="heading lead">Info</p>
+          </div>
+          <!--Body-->
+          <div class="modal-body">
+            <div class="text-center">
+              <p>Please fill the required fields.</p>
+            </div>
+            <button type="button" class="btn m-auto d-block modal-btn" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+        <!--/.Content-->
+      </div>
+    </div>
+
+</div></div>
+
+
+<div class="table-actions">
+
+  <!-- <button class="excel-btn mr-2" (click)="downloadFile()">
+      <i class="fa fa-download pr-2" aria-hidden="true" style="cursor: pointer;"></i>
+      <span class="d-excel-label">Excel Download</span>
+  </button> -->
+
+  <div class="search-wrapper d-flex">
+      <input class="form-control" type="text" id="myInput" [(ngModel)]="searchFilter"
+          placeholder="Search (min 3 characters)">
+  </div>
+</div>
+<div class="table-wrapper table-responsive">
+  <div class="form-sec">
+
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                <th class="sticky-header">
+                  Sl.No
+              </th>
+                  <!-- <th class="sticky-header">
+                    District
+                  </th>
+                  <th class="sticky-header">
+                    FacilityType
+                  </th> -->
+                  <th class="sticky-header">
+                    Area Name
+                  </th>
+                  <th class="sticky-header">
+                    Facility Name
+                  </th>
+                 
+                  <th class="sticky-header">
+                    Submited By
+                  </th>
+                  <th class="sticky-header">
+                    Date
+                  </th>
+                  <th class="sticky-header">
+                    Finalized
+                  </th>
+                  <th class="sticky-header">
+                    Download
+                </th>
+                  <th class="sticky-header">
+                      Reject
+                  </th>
+              </tr>
+          </thead>
+          <tbody 
+              *ngIf="((rdata | searchPipe: searchFilter).length)">
+             
+              <tr *ngFor="let eachP of rdata | searchPipe: searchFilter | paginate: { itemsPerPage: itemsPerPage, currentPage: p, id:pagerId };let i=index">
+                
+                  <td >{{i+1}}</td>
+                  <!-- <td>{{eachP.district}}</td>
+                  <td class="text-center"><div class="copy-wrapper"><span>{{eachP.facilityType || '-'}}</span><span class="clipboard" [attr.data-clipboard-text]="eachP.phone" *ngIf="eachP.phone"><i class="fa fa-clone"></i></span></div></td> -->
+                  <td >{{eachP.areaName || '-'}}</td>
+                  <td>{{eachP.facility}}</td>
+                 
+                  <td>{{eachP.createdBy }}</td>
+                  <td class="clickable" >{{eachP.markedAsCompleteDate | date : "dd-MM-YYYY, hh:mm a" || "-"}}</td>
+                  <!-- <td [ngClass]="eachP.finalized == 'true' ? 'rd' : 'grn'">{{eachP.finalized }}</td> -->
+                  <td >{{eachP.finalized }}</td>
+                  <td class="text-center"> <i class="fa fa-download" (click)="downloadReport(eachP)" aria-hidden="true"></i></td>
+                  <td class="text-center">
+                      <i class="fa fa-times" (click)="tableActionClicked(eachP)" aria-hidden="true"></i>
+                  </td>
+                  
+              </tr>
+          </tbody>
+          
+      </table>
+      <div class="paginate-wrapper" *ngIf="((rdata | searchPipe: searchFilter).length)">
+        <pagination-controls (pageChange)="pageChanged($event)" id="{{pagerId}}" class="pagination-view">
+        </pagination-controls>
+    </div>
+      <div *ngIf="(rdata && !rdata.length) || (rdata && rdata.length && (rdata | searchPipe: searchFilter).length==0)"
+        class="col-md-12 text-center search-area">
+        <mat-card>
+            No Data Found.
+        </mat-card>
+    </div>

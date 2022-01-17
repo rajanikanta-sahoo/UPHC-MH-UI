@@ -1,0 +1,217 @@
+
+.mat-form-field {
+    display: block !important;
+}
+.marg-left{
+    display: flex;
+    margin-left: 22%;
+    margin-top: 15px;
+}
+.modal-btn{
+    background-color: #2f515b !important;
+    color: #fff;
+}
+.btn-view{
+    background-color: #2f515b !important;
+}
+button.submit-selection{
+    margin-top: 30px !important;
+}
+span.field_mandatory{
+    font-size: 11px !important;
+  }
+
+  .modal-header{
+    padding-bottom: 0px !important;
+}
+.lead{
+    font-weight: 600 !important;
+    color: #2f515b !important;
+}
+.user-heading {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    color: #2f515b;
+    margin-bottom: 20px;
+    padding-bottom: 7px;
+    width: 100% !important;
+  }
+
+  .content-sec-other{
+    padding-top: 15px;
+    margin-left: 0;
+  }
+
+  @media(max-width: 767px){
+    .marg-left{
+        margin-left: 0%;
+        margin-top: 0;
+        display: inline;
+    }
+    div#selectDistrict {
+        padding: 0;
+    }
+    div#selectFacilityName {
+        padding: 0;
+    }
+  }
+
+  .staff-card {
+    margin: 15px 0 0 0;
+    background: white;
+    border: 1px solid lightgray;
+}
+.heading-wrapper {
+    .page-heading {
+        font-size: 24px;
+        font-weight: 600;
+    }
+}
+    .tab-button {
+        background: white;
+        border: 1px solid lightgray;
+        padding: 10px 18px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        margin: 0 2px;
+        color: black;
+        box-shadow: 1px 2px 2px 1px #e9e9e9;
+    }
+    .selected {
+        color: white;
+        background: #00A850;
+    }
+.tabs-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-around;
+    .tab {
+        width: 20%;
+        margin: 0 20px;
+        min-width: 140px;
+        padding: 12px 0;
+        @media(max-width: 767px) {
+            min-width: 200px;
+            margin: 0 40px;
+        }
+    }
+    .ticket-count {
+        font-size: 24px;
+        font-weight: 600;
+    }
+    .progress-bar {
+        width: 100%;
+        height: 2px;
+        background: #e0e0e0;
+        .progress-indicator {
+            background: var(--p900);
+            width: 10%;
+            height: 2px;
+            position: relative;
+        }
+    }
+    .ticket-lable {
+        cursor: pointer;
+    }
+}
+.excel-btn {
+    background: green;
+    color: white;
+    align-self: flex-end;
+    margin: auto 0;
+}
+.search-wrapper {
+    max-width: 240px;
+}
+
+.table-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+}
+.selected-tab .ticket-lable {
+    color: #00A850;
+}
+.table thead th {
+    border-right: 2px solid #dee2e6 !important;
+    background: #75B844;
+    color: white;
+}
+.sticky-header {
+    background-color: #2f515b !important;
+}
+.dropdowns-holder {
+    display: flex;
+    border-bottom: 1px solid lightgray;
+}
+.dropdown-wrapper {
+    display: flex;
+    align-items: baseline;
+    padding: 20px 15px 5px 15px;
+    label {
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+    @media(max-width: 450px) {
+        flex-direction: column;
+    }
+    @media(max-width: 767px) {
+        padding: 20px 10px 5px 10px;
+    }
+}
+.mw-300 {
+    max-width: 300px !important;
+}
+:host ::ng-deep .mat-form-field-infix {
+    border: 1px solid !important;
+    padding: 0.275em 4px !important;
+    width: 240px !important;
+}
+.form-sec {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+form.dropdowns-holder {
+    display: flex;
+    flex-wrap: wrap;
+}
+.check-box {
+    max-width: 50px;
+}
+.paginate-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+.patient-id {
+    color: var(--p900);
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 15px;
+    margin-top: 5px;
+}
+.fg-wrapper {
+    padding: 0 15px;
+    margin-top: 20px;
+}
+.clickable {
+    color: skyblue;
+    font-weight: 600;
+    cursor: pointer;
+}
+.icon-color, .table .fa.c-p, .fa *{
+    color: #09ad98;
+}
+:host ::ng-deep .ngx-pagination .current, .ngx-pagination .current, .current {
+    background: var(--color-primary) !important;
+  }
+  .grn{
+      color: green;
+      font-weight: bold;
+  }
+  .rd{
+      color: red;
+      font-weight: bold;
+  }

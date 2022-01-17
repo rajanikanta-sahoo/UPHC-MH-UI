@@ -1,0 +1,193 @@
+<div class="container-fluid">
+  <div class="row question-row">
+        <div class="col-md-12 content-sec-other offset-md-2">
+      <div class="col-md-12">
+          <h2 class="user-heading">District Health Action Plan</h2>
+          <span class="field_mandate" style="color: #F00"></span><span class="field_mandatory"> All fields are mandatory</span>
+          <div class="marg-left-other col-md-10 col-sm-6 m-auto">
+     <form class="all-fields row" #f="ngForm">
+
+      <!-- <div class="selection-fields col-md-4">
+          <label for="usr">State<span style="color:red; font-weight:500;">*</span> :</label>
+          <mat-form-field>
+              <mat-select [disabled]="showAreaLoginBased"  matInput name="state" (selectionChange)="getDistrict(selectedState)" [(ngModel)]="selectedState" required>
+                  <mat-option *ngFor="let state of dhapService.stateLists" [value]='state.areaId'>
+                      {{state.areaName}}
+                  </mat-option>
+              </mat-select>
+              <mat-error class="padding-bottom ">
+                  Please provide a state name
+                  </mat-error>
+          </mat-form-field>
+     </div> -->
+     <div class="select-container   col-md-4">
+            <div id="selectedUserDrop" class="input-group">
+              <input type="text" placeholder="Select State" id="state"
+                class="form-control not-visible-input" name="state"
+                readonly="" [(ngModel)]="selectedState"
+                oninvalid="this.setCustomValidity('Please provide user role')" required >
+              <div class="input-group-btn" style="position: relative;">
+                <button data-toggle="dropdown"
+                  class="btn btn-color " type="button"style="margin-top: 0px;">
+                  <i class="fa fa-list"></i>
+                </button>
+                <ul class="dropdown-menu" 
+                  role="menu" [ngStyle]="{'width.px': getWidth('selectedUserDrop')}">
+                  <li  class="dropdown-item"
+                   *ngFor="let state of dhapService.stateLists" [value]='state.areaId' (click)="getDistrict(state)">{{state.areaName}}</li>
+                </ul>
+              </div>
+            </div>
+        </div>
+
+  <!-- <div class="selection-fields col-md-4" >      <label for="usr">District<span style="color:red; font-weight:500;">*</span> :</label>
+      <mat-form-field>
+          <mat-select [disabled]="showDistrictLoginBased" name="district" [(ngModel)]="selectedDistrict" required>
+              <mat-option *ngFor="let dist of dhapService.districtLists" [value]=dist>
+                  {{dist.areaName}}
+              </mat-option>
+          </mat-select>
+          <mat-error class="padding-bottom ">
+              Please provide district name
+              </mat-error>
+      </mat-form-field>
+</div> -->
+
+
+<div class="select-container   col-md-4">
+    <div id="selectedUserDrop" class="input-group">
+      <input type="text" placeholder="Select District" id="district"
+        class="form-control not-visible-input" name="district"
+        readonly="" [(ngModel)]="selectedDistrict"
+        oninvalid="this.setCustomValidity('Please provide user role')" required >
+      <div class="input-group-btn" style="position: relative;">
+        <button data-toggle="dropdown" [disabled]="!selectedState"
+          class="btn btn-color " type="button"style="margin-top: 0px;">
+          <i class="fa fa-list"></i>
+        </button>
+        <ul class="dropdown-menu" 
+          role="menu" [ngStyle]="{'width.px': getWidth('selectedUserDrop')}">
+          <li  class="dropdown-item"
+           *ngFor="let dist of dhapService.districtLists" [value]='dist' (click)="getModel(dist)"> {{dist.areaName}}</li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="selection-fields col-md-4" >
+    <label for="usr">Time Period<span style="color:red; font-weight:500;">*</span> :</label>
+    <mat-form-field>
+        <mat-select name="timepp" [(ngModel)]="selectedTime" required>
+            <mat-option *ngFor='let time of allTime' [value]=time.timePeriodId>
+                {{time.shortName}}
+            </mat-option>
+        </mat-select>
+        <mat-error class="padding-bottom ">
+            Please provide time period
+            </mat-error>
+    </mat-form-field>
+</div> -->
+
+
+
+<div class="select-container col-md-4">
+    <div id="selectedUserDrop" class="input-group">
+      <input type="text" placeholder="Select Time Period" id="timepp"
+        class="form-control not-visible-input" name="timepp"
+        readonly="" [(ngModel)]="selectedTime"
+        oninvalid="this.setCustomValidity('Please provide user role')" required >
+      <div class="input-group-btn" style="position: relative;">
+        <button data-toggle="dropdown" [disabled]="!selectedDistrict"
+          class="btn btn-color " type="button"style="margin-top: 0px;">
+          <i class="fa fa-list"></i>
+        </button>
+        <ul class="dropdown-menu" 
+          role="menu" [ngStyle]="{'width.px': getWidth('selectedUserDrop')}">
+          <li  class="dropdown-item"
+           *ngFor="let time of allTime" [value]=time.timePeriodId (click)="getTimePeriod(time)"> {{time.shortName}}</li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+
+
+  <div class="selection-field col-md-12 col-sm-12 col-12 text-center" style="margin: 10px 0;" >
+    <button type="submit" (click)="downloadReport()" class="submit-selection" style="margin-top: 0px;"
+      >Download Health Action Plan</button>
+  </div>
+  </form>
+  </div>
+  </div>
+</div>
+<!-- <pre>{{areaId | json}} </pre> -->
+
+<div class="modal fade" id="errorMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">Error</p>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text">
+                    <p> No Data Found </p>
+                </div>
+                <button type="button" class="btn btn-secondary m-auto d-block modal-btn" (click)="errorModal()">Ok</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<div class="modal fade" id="infoMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-notify modal-error" role="document">
+      <!--Content-->
+      <div class="modal-content">
+          <!--Header-->
+          <div class="modal-header">
+              <p class="heading lead">Info</p>
+          </div>
+
+          <!--Body-->
+          <div class="modal-body">
+              <div class="text-modal">
+                  <p>Please fill the required fields.</p>
+              </div>
+              <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal">Ok</button>
+          </div>
+      </div>
+      <!--/.Content-->
+  </div>
+</div>
+
+<div class="modal fade" id="noDataModall" role="dialog"
+							style="margin-top: 12%;">
+							<div class="modal-dialog">
+
+								<!-- Modal content-->
+								<div class="modal-content modal-info">
+									<div class="modal-header"
+										style="background-color: #2f515b; color: #fff;">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<!-- <h4 class="modal-title" style="text-align: center;">Info</h4> -->
+									</div>
+									<div class="modal-body">
+										<p
+											style="text-align: center; font-size: 20px; margin-bottom: -10px;">NO
+											DATA AVAILABLE</p>
+									</div>
+									<div class="modal-footer" style="text-align: center;">
+										<button type="button"
+											class="btn btn-default btn-view text-center "
+											data-dismiss="modal">Ok</button>
+									</div>
+								</div>
+
+							</div>
+            </div>
