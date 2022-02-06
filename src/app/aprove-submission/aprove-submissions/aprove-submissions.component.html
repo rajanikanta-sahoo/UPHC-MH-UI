@@ -150,12 +150,12 @@
       <span class="d-excel-label">Excel Download</span>
   </button> -->
 
-  <div class="search-wrapper d-flex">
+  <div class="search-wrapper d-flex" *ngIf="((rdata).length)">
       <input class="form-control" type="text" id="myInput" [(ngModel)]="searchFilter"
           placeholder="Search (min 3 characters)">
   </div>
 </div>
-<div class="table-wrapper table-responsive">
+<div class="table-wrapper table-responsive" *ngIf="((rdata).length)">
   <div class="form-sec">
 
       <table class="table table-striped">
@@ -183,14 +183,14 @@
                   <th class="sticky-header">
                     Date
                   </th>
-                  <th class="sticky-header">
+                  <!-- <th class="sticky-header">
                     Finalized
-                  </th>
+                  </th> -->
                   <th class="sticky-header">
                     Download
                 </th>
                   <th class="sticky-header">
-                      Reject
+                      Action
                   </th>
               </tr>
           </thead>
@@ -206,12 +206,16 @@
                   <td>{{eachP.facility}}</td>
                  
                   <td>{{eachP.createdBy }}</td>
-                  <td class="clickable" >{{eachP.markedAsCompleteDate | date : "dd-MM-YYYY, hh:mm a" || "-"}}</td>
+                  <td       >{{eachP.markedAsCompleteDate | date : "dd-MM-yyyy, hh:mm a" || "-"}}</td>
                   <!-- <td [ngClass]="eachP.finalized == 'true' ? 'rd' : 'grn'">{{eachP.finalized }}</td> -->
-                  <td >{{eachP.finalized }}</td>
-                  <td class="text-center"> <i class="fa fa-download" (click)="downloadReport(eachP)" aria-hidden="true"></i></td>
+                  <!-- <td >{{eachP.finalized }}</td> -->
+                  <td class="text-center" id="downloadIcon"> <i class="fa fa-download" (click)="downloadReport(eachP)" aria-hidden="true"></i></td>
                   <td class="text-center">
-                      <i class="fa fa-times" (click)="tableActionClicked(eachP)" aria-hidden="true"></i>
+                    
+                      <span id="greenIcon"><i class="fa fa-check" (click)="acceptClicked(eachP)" aria-hidden="true"></i></span>
+                      
+                      <span id="redIcon"><i class="fa fa-times" (click)="tableActionClicked(eachP)" aria-hidden="true"></i></span>
+                        
                   </td>
                   
               </tr>

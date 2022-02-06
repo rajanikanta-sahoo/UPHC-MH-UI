@@ -68,7 +68,7 @@ export class AproveSubmissionsComponent implements OnInit {
 
 
 	getAllDistricts(data) {
-		this.fipService.getFipDistrict(data).then((data) => {
+		this.submissionServiceService.getFinalizeDistrict(data).then((data) => {
 			this.allDistricts = data as any;
 			this.fipDistricts = this.allDistricts;
 
@@ -141,11 +141,22 @@ export class AproveSubmissionsComponent implements OnInit {
 	}
 
 	tableActionClicked(emittedData) {
-		console.log("hello");
+		// console.log("hello");
+		// $(".loader").show();
+		// alert("delete")
 		this.submissionServiceService.rejectSubmission(emittedData.lastVisitDataId).then(response => {
 			this.getTable();
 		})
 		
+	}
+
+	acceptClicked(emittedData){
+		// console.log("accept");
+		// $(".loader").show();
+		// alert("accept");
+		this.submissionServiceService.makeSubmissionFinalize(emittedData.lastVisitDataId).then(response => {
+			this.getTable();
+		})
 	}
 
 	getTable() {
@@ -192,6 +203,7 @@ export class AproveSubmissionsComponent implements OnInit {
 		}
 	}
 
+	
 
 	downloadReport(emittedData) {
 

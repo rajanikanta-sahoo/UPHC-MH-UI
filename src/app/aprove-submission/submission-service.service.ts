@@ -19,6 +19,11 @@ export class SubmissionServiceService {
     return this.httpClient.get(Constants.HOME_URL+'database/'+'rejectSubmission?lastVistDataId='+lastVistDataId).toPromise()
   }
 
+  acceptSubmission(lastVistDataId)
+  {
+    return this.httpClient.get(Constants.HOME_URL+'database/'+'acceptSubmission?lastVistDataId='+lastVistDataId).toPromise()
+  }
+
   makeSubmissionFinalize(lastVistDataId)
   {
     return this.httpClient.get(Constants.HOME_URL+'database/'+'makeSubmissionFinalize?lastVistDataId='+lastVistDataId).toPromise()
@@ -29,4 +34,8 @@ export class SubmissionServiceService {
     return this.httpClient.get(Constants.HOME_URL+'database/'+'generateFIP?lastVistDataId='+lastVistDataId).toPromise()
   }
 
+  getFinalizeDistrict(areaId)
+  {
+    return this.httpClient.get(Constants.HOME_URL+'database/'+'getFinalizeDistrict?stateId='+areaId).toPromise()
+  }
 }

@@ -215,3 +215,24 @@ form.dropdowns-holder {
       color: red;
       font-weight: bold;
   }
+  #greenIcon{
+    margin-right: 20px;
+    // margin-left: -20px;
+    color: chartreuse;
+    font-size: larger;
+    font-weight: bold;      
+  }
+  
+  #redIcon{
+    margin-left: 20px;
+    // margin-right: -20px;
+    color: red;
+    font-size: larger;
+    font-weight: bold;      
+  }
+  #downloadIcon{
+    color: brown;
+    font-size: larger;
+    font-weight: bold;      
+  }
+  i { cursor: pointer; }

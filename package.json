@@ -1,10 +1,10 @@
 {
-  "name": "dga-ui",
+  "name": "uphc-ui",
   "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve ",
-    "build": "ng build --prod --base-href /dgaweb/",
+    "build": "ng build --prod --base-href /uphc-web/",
     "build-prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
