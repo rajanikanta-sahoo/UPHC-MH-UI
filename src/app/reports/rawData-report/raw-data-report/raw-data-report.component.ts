@@ -166,49 +166,67 @@ export class RawDataReportComponent implements OnInit {
 			facilitesType= this.selectedArea.areaLevelName;
 			let report=[this.selectedProgram,facilitesType,this.selectedTimePeriod.timePeriod_Nid,this.selectedState.areaId];
 
-			this.httpClient.post(Constants.HOME_URL + 'getRawDataReport', report, {
+			//old rawdata report
+			// this.httpClient.post(Constants.HOME_URL + 'getRawDataReport', report, {
       
-				responseType: "blob"
+			// 	responseType: "blob"
 				
-			  }).pipe(
-				map((res: Blob) => res),
-				catchError((res: Blob) => throwError(res))
-			  ).subscribe(data => {
-				  console.log(data)
-				//this.spinner.hide();
-				if(report[1]=="HSC"||report[1]=="UHC")
-				fileversion="3";
-				else
-				fileversion=report[2];
-				savesAs(data, report[0] + "_"+report[1]+ "_v"+fileversion + "_Raw Data_r1.xlsx");
-			  },
-				error => {
+			//   }).pipe(
+			// 	map((res: Blob) => res),
+			// 	catchError((res: Blob) => throwError(res))
+			//   ).subscribe(data => {
+			// 	  console.log(data)
+			// 	//this.spinner.hide();
+			// 	if (data == null ) {
+			// 		$("#noDataModall").modal("show");
+			// 	}
+			// 	if(report[1]=="HSC"||report[1]=="UHC")
+			// 	fileversion="3";
+			// 	else
+			// 	fileversion=report[2];
+			// 	savesAs(data, report[0] + "_"+report[1]+ "_v"+fileversion + "_Raw Data_r1.xlsx");
+			//   },
+			// 	error => {
 				  
-				});
+			// 	});
+
+
+			//new rawdata report
+			this.fipService.getRawDataReport(facilitesType,this.selectedProgram,this.selectedTimePeriod.timePeriod_Nid,this.selectedState.areaId).then(response => {
+
+				if (response == null || response["File"] == null || response["File"].trim() == "") {
+					$("#noDataModall").modal("show");
+				}
+				else {
+					var fileName = { "fileName": response["File"] };
+					this.download(Constants.HOME_URL + "downloadFile", fileName, 'POST');
+				}
+
+			})	
 
 		}
 	}
 
 // 
-	// download(url, data, method) {
-	// 	// url and data options required
-	// 	if (url && data) {
-	// 		// data can be string of parameters or array/object
-	// 		data = typeof data == 'string' ? data : $.param(data);
-	// 		// split params into form inputs
-	// 		var inputs = '';
-	// 		$.each(data.split('&'), function () {
-	// 			var pair = this.split('=');
-	// 			inputs += '<input type="hidden" name="' + pair[0] + '" value="' + pair[1] + '" />';
-	// 		});
+	download(url, data, method) {
+		// url and data options required
+		if (url && data) {
+			// data can be string of parameters or array/object
+			data = typeof data == 'string' ? data : $.param(data);
+			// split params into form inputs
+			var inputs = '';
+			$.each(data.split('&'), function () {
+				var pair = this.split('=');
+				inputs += '<input type="hidden" name="' + pair[0] + '" value="' + pair[1] + '" />';
+			});
 
-	// 		inputs += '<input type="hidden" name="_csrf" value="' + this.httpXsrfTokenExtractor.getToken() + '" />';
-	// 		// send request
-	// 		$(
-	// 			'<form action="' + url + '" method="' + (method || 'post')
-	// 			+ '">' + inputs + '</form>').appendTo('body')
-	// 			.submit().remove();
-	// 	}
-	// }
+			inputs += '<input type="hidden" name="_csrf" value="' + this.httpXsrfTokenExtractor.getToken() + '" />';
+			// send request
+			$(
+				'<form action="' + url + '" method="' + (method || 'post')
+				+ '">' + inputs + '</form>').appendTo('body')
+				.submit().remove();
+		}
+	}
 
 }

@@ -19,6 +19,7 @@ import { DdmReportComponent } from './ddm/ddm-report/ddm-report.component';
 import { LaQkhyaComponent } from './ddm/la-qkhya/la-qkhya.component';
 import { ContactUsComponent } from './static/contact-us/contact-us.component';
 import  { AproveSubmissionsComponent } from './aprove-submission/aprove-submissions/aprove-submissions.component';
+import { NoDataAvlComponent } from './no-data-avl/no-data-avl.component';
 
 const routes: Routes = [
   {
@@ -38,13 +39,15 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule',
+    // component: NoDataAvlComponent,
     pathMatch: 'full',
     canActivate: [ServerCheckGuard,AuthorizationGuard],
     data: { expectedAuthority: 'dashboard',title : 'DGA-Dashboard' }
   },
   {
     path: 'dataTree',
-    loadChildren: './data-tree/data-tree.module#DataTreeModule',
+    // loadChildren: './data-tree/data-tree.module#DataTreeModule',
+    component: NoDataAvlComponent,
     pathMatch: 'full',
     canActivate: [ServerCheckGuard,AuthorizationGuard],
     data: { expectedAuthority: 'dataTree',title : 'DGA-Data Tree' }
@@ -126,7 +129,8 @@ const routes: Routes = [
   },
   {
     path: 'ddm-entry',
-    component: DdmEntryComponent,
+    // component: DdmEntryComponent,
+    component: NoDataAvlComponent,
     pathMatch: 'full',
     
      canActivate: [ServerCheckGuard,AuthorizationGuard],
@@ -134,7 +138,8 @@ const routes: Routes = [
   },
   {
     path: 'ddm-report',
-    component: DdmReportComponent,
+    // component: DdmReportComponent,
+    component: NoDataAvlComponent,
     pathMatch: 'full',
     
      canActivate: [ServerCheckGuard,AuthorizationGuard],
@@ -148,7 +153,8 @@ const routes: Routes = [
   },
   {
     path: 'laQshya',
-    component: LaQkhyaComponent,
+    // component: LaQkhyaComponent,
+    component: NoDataAvlComponent,
     data:{title : 'DGA-LaQshya' },
     pathMatch: 'full'
   },

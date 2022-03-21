@@ -7,6 +7,7 @@ import { FipComponent } from './fip/fip.component';
 import { ServerCheckGuard } from '../guard/server-check.guard';
 import { RawDataReportComponent } from './rawData-report/raw-data-report/raw-data-report.component';
 import { DistHealthActionPlanComponent } from './dist-health-action-plan/dist-health-action-plan.component';
+import { NoDataAvlComponent } from '../no-data-avl/no-data-avl.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
   {
     path: 'crossTab',
     component: CrossTabReportComponent,
+    // component: NoDataAvlComponent,
     pathMatch: 'full',
     canActivate: [ServerCheckGuard,AuthorizationGuard],
     data:{ expectedAuthority: 'CrossTab' ,title : 'DGA-Cross Tab Report'}
@@ -44,6 +46,7 @@ const routes: Routes = [
   {
     path: 'dhap',
     component: DistHealthActionPlanComponent,
+    // component: NoDataAvlComponent,
     canActivate: [ServerCheckGuard,AuthorizationGuard],
     pathMatch: 'full',
     data:{ expectedAuthority: 'FIP',title : 'DGA-District Health Action Plan'}

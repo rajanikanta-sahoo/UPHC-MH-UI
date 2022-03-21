@@ -37,6 +37,7 @@ import { ContactUsComponent } from './static/contact-us/contact-us.component';
 import { AproveSubmissionsComponent } from './aprove-submission/aprove-submissions/aprove-submissions.component';
 import { SearchModule } from './pipes/search/search.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NoDataAvlComponent } from './no-data-avl/no-data-avl.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DdmReportComponent,
     LaQkhyaComponent,
     ContactUsComponent,
-    AproveSubmissionsComponent
+    AproveSubmissionsComponent,
+    NoDataAvlComponent
   ],
   imports: [
     BrowserModule,

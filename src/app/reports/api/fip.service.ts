@@ -32,6 +32,10 @@ export class FipService {
     return this.httpClient.get(Constants.HOME_URL+'getFIPReport?areaCode='+areaCode+'&formMetaId='+formMetaId+'&stateId='+stateId).toPromise()
   }
 
+  getRawDataReport(facilityName,programId,timePeriodId,stateId){
+    return this.httpClient.get(Constants.HOME_URL+'getRawDataReportFile?facilityName='+facilityName+"&programId="+programId+"&timePeriodId="+timePeriodId+"&stateId="+stateId).toPromise()
+  }
+
   getAllTimeperiod(stateId,programId)
   {
     return this.httpClient.get(Constants.HOME_URL+'getAllTimePeriodForRawData?stateId='+stateId+'&programId='+programId).toPromise()

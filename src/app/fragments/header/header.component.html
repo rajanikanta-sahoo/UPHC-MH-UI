@@ -58,10 +58,10 @@
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown">Reports</a>
                             <div class="dropdown-menu arrow">
                                 <div class="triangle-up"></div>
-                                <a class="dropdown-item" [ngClass]="{'active': router.url=='/report/summary'}"
+                                <!-- <a class="dropdown-item" [ngClass]="{'active': router.url=='/report/summary'}"
                                     routerLink="report/summary">Summary Report </a>
                                 <a class="dropdown-item" [ngClass]="{'active': router.url=='/report/crossTab'}"
-                                    routerLink="report/crossTab">Cross-tab Report</a>
+                                    routerLink="report/crossTab">Cross-tab Report</a> -->
                                 <a class="dropdown-item" [ngClass]="{'active': router.url=='/report/rawData'}"
                                     routerLink="report/rawData">Raw Data Report</a>
 
@@ -72,10 +72,10 @@
                             <a class="nav-link" mdbRippleRadius routerLink="report/fip">FIP</a>
                         </li>
 
-                        <li class="nav-item dropdown" *ngIf="auth.checkLoggedIn()"
+                        <!-- <li class="nav-item dropdown" *ngIf="auth.checkLoggedIn()"
                             [ngClass]="{'active': router.url=='/report/dhap'}">
                             <a class="nav-link" mdbRippleRadius routerLink="report/dhap">DHAP</a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item dropdown" *ngIf="auth.checkLoggedIn()"
                         [ngClass]="{'active': router.url=='/aprove'}">

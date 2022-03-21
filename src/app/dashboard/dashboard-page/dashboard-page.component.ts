@@ -76,6 +76,8 @@ export class DashboardPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("on dashbord");
+    
     $("#pdfDownloadBtn").hover(() => {
 
     });
