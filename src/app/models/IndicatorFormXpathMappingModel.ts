@@ -1,13 +1,13 @@
 export class IndicatorFormXpathMappingModel {
     indicatorFormXpathMappingId:number;
 
-    dhXpath:string;
+    dispansaryXpath:string;
 
-    chcXpath:string;
+    maternityHomeXpath:string;
 
-    phcXpath:string;
+    healthPostXpath:string;
 
-    hscXpath:string;
+    uphcXpath:string;
 
     label:string;
 

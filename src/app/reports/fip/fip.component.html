@@ -145,7 +145,7 @@
 
 
     <div class="select-container   col-md-3">
-      <div id="selectFacilityName" class="input-group">
+      <div id="selectFacilityName" class="input-group" *ngIf="this.selectedArea.areaLevelName!='Covid'"> 
         <input type="text" placeholder="Facility Name" id="facilityName"
           class="form-control not-visible-input" name="facilityName"
           readonly="" [(ngModel)]="selectedFacility.facilityName"

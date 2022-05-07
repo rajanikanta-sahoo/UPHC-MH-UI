@@ -111,19 +111,19 @@ selectState(state)
 		
 		this.allIndicators=this.allIndicatorsList.filter( (item)=> {
 				if(this.selectedFacility.form_meta_id==2)
-			  return item.dhXpath != '0';
-				
-				else if	(this.selectedFacility.form_meta_id==1)
-					return item.chcXpath != '0';
+			  return item.dispansaryXpath != '0';
 				
 				else if	(this.selectedFacility.form_meta_id==3)
-					return item.phcXpath != '0';
+					return item.healthPostXpath != '0';
+				
+				else if	(this.selectedFacility.form_meta_id==4)
+					return item.maternityHomeXpath != '0';
 
-					else if	(this.selectedFacility.form_meta_id==5)
-					return item.hscXpath != '0';
+					else if	(this.selectedFacility.form_meta_id==1)
+					return item.uphcXpath != '0';
 				
 				else if	(this.selectedFacility.formId==0)
-					return (item.phcXpath != '0'&&item.chcXpath != '0'&&item.dhXpath != '0'&&item.hscXpath != '0')||(item.phcXpath == '0'&&item.chcXpath == '0'&&item.dhXpath == '0'&&item.hscXpath != '0');
+					return (item.dispansaryXpath != '0'&&item.healthPostXpath != '0'&&item.maternityHomeXpath != '0'&&item.uphcXpath != '0')||(item.dispansaryXpath == '0'&&item.maternityHomeXpath == '0'&&item.healthPostXpath == '0'&&item.uphcXpath != '0');
 					
 		});
 		this.rowIndicator='';
@@ -207,25 +207,25 @@ getTableData(){
 			let crossTabDataModel={
 				colIndicatorFormXpathMappingId:this.selectedcolIndicator.indicatorFormXpathMappingId,
 
-				colDhXpath:this.selectedFacility.form_meta_id==2||this.selectedFacility.formId==0?this.selectedcolIndicator.dhXpath:0,
+				colDispansaryXpath:this.selectedFacility.form_meta_id==2||this.selectedFacility.formId==0?this.selectedcolIndicator.dispansaryXpath:0,
 
-				colChcXpath:this.selectedFacility.form_meta_id==1||this.selectedFacility.formId==0?this.selectedcolIndicator.chcXpath:0,
+				colUphcXpath:this.selectedFacility.form_meta_id==1||this.selectedFacility.formId==0?this.selectedcolIndicator.uphcXpath:0,
 
-				colPhcXpath:this.selectedFacility.form_meta_id==3||this.selectedFacility.formId==0?this.selectedcolIndicator.phcXpath:0,
+				colHealthPostXpath:this.selectedFacility.form_meta_id==3||this.selectedFacility.formId==0?this.selectedcolIndicator.healthPostXpath:0,
 
-				colHscXpath:this.selectedFacility.form_meta_id==5||this.selectedFacility.formId==0?this.selectedcolIndicator.hscXpath:0,
+				colMaternityHomeXpath:this.selectedFacility.form_meta_id==4||this.selectedFacility.formId==0?this.selectedcolIndicator.maternityHomeXpath:0,
 					
 				coLabel:this.selectedcolIndicator.label,
 
 				rowIndicatorFormXpathMappingId:this.selectedrowIndicator.indicatorFormXpathMappingId,
 					
-				rowDhXpath:this.selectedFacility.form_meta_id==2||this.selectedFacility.formId==0?this.selectedrowIndicator.dhXpath:0,
+				rowDispansaryXpath:this.selectedFacility.form_meta_id==2||this.selectedFacility.formId==0?this.selectedrowIndicator.dispansaryXpath:0,
 					
-				rowChcXpath:this.selectedFacility.form_meta_id==1||this.selectedFacility.formId==0?this.selectedrowIndicator.chcXpath:0,
+				rowUphcXpath:this.selectedFacility.form_meta_id==1||this.selectedFacility.formId==0?this.selectedrowIndicator.uphcXpath:0,
 
-				rowPhcXpath:this.selectedFacility.form_meta_id==3||this.selectedFacility.formId==0?this.selectedrowIndicator.phcXpath:0,
+				rowHealthPostXpath:this.selectedFacility.form_meta_id==3||this.selectedFacility.formId==0?this.selectedrowIndicator.healthPostXpath:0,
 
-				rowHscXpath:this.selectedFacility.form_meta_id==5||this.selectedFacility.formId==0?this.selectedrowIndicator.hscXpath:0,
+				rowMaternityHomeXpath:this.selectedFacility.form_meta_id==4||this.selectedFacility.formId==0?this.selectedrowIndicator.maternityHomeXpath:0,
 					
 				rowLabel:this.selectedrowIndicator.label,
 

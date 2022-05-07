@@ -139,16 +139,22 @@ export class FipComponent implements OnInit {
 			$("#infoMatch").modal("show");
 			return false;
 		}
-		else if (!this.selectedFacility || this.selectedFacility.areaId == undefined) {
+		else if (this.selectedArea.areaLevelName!='Covid' && (!this.selectedFacility || this.selectedFacility.areaId == undefined)) {
 			this.errorMsg = "Facility";
 			$("#infoMatch").modal("show");
 			return false;
 		}
 		else {
-			
+			let fipAreaCode;
 			$(".loader").show();
+
+			if(this.selectedArea.areaLevelName==='Covid'){
+				fipAreaCode = this.selectedDistrict.areaCode;
+			}else{
+				fipAreaCode = this.selectedFacility.facilityCode;
+			}
 			
-			this.fipService.getFipReport(this.selectedFacility.facilityCode, this.selectedFacilityType.xform_meta_id, this.selectedState.areaId).then(response => {
+			this.fipService.getFipReport(fipAreaCode, this.selectedFacilityType.xform_meta_id, this.selectedState.areaId).then(response => {
 
 				if (response == null || response["File"] == null || response["File"].trim() == "") {
 					$("#noDataModall").modal("show");

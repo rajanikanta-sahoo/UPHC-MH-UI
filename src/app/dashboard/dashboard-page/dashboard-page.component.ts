@@ -7,6 +7,7 @@ import { FormXpathScoreMapping } from 'src/app/models/FormXpathScoreMapping';
 import { TimePeriod } from 'src/app/models/TimePeriodModel';
 import * as d3 from "d3";
 import { ProgramModel } from 'src/app/models/ProgramModel';
+import { distinct } from 'rxjs/operators';
 declare var $: any;
 @Component({
   selector: 'sdrc-dashboard-page',
@@ -43,6 +44,12 @@ export class DashboardPageComponent implements OnInit {
   selectedProgram: ProgramModel = new ProgramModel();
   programList: ProgramModel[] = [];
 
+  selectedMunicpal: AreaModel = new AreaModel();
+  selectedWord: AreaModel = new AreaModel();
+
+  allMunicipals = [];
+  allWords = [];
+
   selectedPushpin;
   columns;
   allTimePeriods = [];
@@ -67,7 +74,7 @@ export class DashboardPageComponent implements OnInit {
       latitude: 26.344158,
       longitude: 92.673615
     },
-    zoom: 6.5,
+    zoom: 7.5,
     markers: []
   };
   polygons;
@@ -159,9 +166,47 @@ export class DashboardPageComponent implements OnInit {
       this.getSpiderData(this.selectedParentSector.formId, 0,
         this.selectedDistrict.areaId);
     }
+    this.selectedMunicpal = new AreaModel();
+    this.selectedWord = new AreaModel();
+
+    this.getAllMunicipals(District);
+
+  }
+
+  selectMunicipal(municpal) {
+    this.selectedPushpin = "";
+    this.lastVisiDataId = 0;
+    this.selectedMunicpal = municpal;
+    if (this.sectors.length && !this.pushpinDataCallDone) {
+      this.map.markers = [];
+      this.getPushpinData(this.selectedParentSector.formId,
+        this.selectedSector.formXpathScoreId,
+        this.selectedDistrict.areaId);
+
+      this.getSpiderData(this.selectedParentSector.formId, 0,
+        this.selectedDistrict.areaId);
+    }
+    this.selectedWord = new AreaModel();
+this.getAllWordss(municpal);
+  }
+
+  selectWord(word) {
+    this.selectedPushpin = "";
+    this.lastVisiDataId = 0;
+    this.selectedWord = word;
+    if (this.sectors.length && !this.pushpinDataCallDone) {
+      this.map.markers = [];
+      this.getPushpinData(this.selectedParentSector.formId,
+        this.selectedSector.formXpathScoreId,
+        this.selectedDistrict.areaId);
+
+      this.getSpiderData(this.selectedParentSector.formId, 0,
+        this.selectedDistrict.areaId);
+    }
 
 
   }
+
   selectTimePeriod(timeperiod) {
     this.selectedPushpin = "";
     this.lastVisiDataId = 0;
@@ -263,6 +308,24 @@ export class DashboardPageComponent implements OnInit {
     });
   };
 
+  getAllMunicipals(dist) {
+    let id = dist.areaId == 0? 2:dist.areaId;
+    
+    this.dashboardService.getAreas(id).then(response => {
+      let data = response as any;
+      this.allMunicipals = data;
+      // this.selectMunicipal(this.allMunicipals[0]);
+    });
+  };
+
+  getAllWordss(municpal) {
+    this.dashboardService.getAreas(municpal.areaId).then(response => {
+      let data = response as any;
+      this.allWords = data;
+      // this.selectWord(this.allWords[0]);
+    });
+  };
+
 
   getAllState() {
     this.dashboardService.getStateList().then(response => {
@@ -360,12 +423,12 @@ export class DashboardPageComponent implements OnInit {
     this.dashboardService.getParentSectors(stateid, timperiod, programId).then((data) => {
       this.parentSectors = data;
       
-     if(this.selectedProgram.programName == 'UPSC Assesment'){
+     if(this.selectedProgram.programName == 'UPHC Assessment'){
       this.selectedParentSector = this.parentSectors[0];
       
       this.getSpiderData(this.selectedParentSector.formId, 0, 0);
       this.getSectors(this.selectedParentSector.formXpathScoreId);
-     }else if(this.selectedProgram.programName == 'Covid Assesment'){
+     }else if(this.selectedProgram.programName == 'Covid Assessment'){
       this.selectedParentSector = this.parentSectors[0];
       this.getSpiderData(this.selectedParentSector.formId, 0, 0);
       this.getSectors(this.selectedParentSector.formXpathScoreId);

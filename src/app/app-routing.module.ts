@@ -46,8 +46,8 @@ const routes: Routes = [
   },
   {
     path: 'dataTree',
-    // loadChildren: './data-tree/data-tree.module#DataTreeModule',
-    component: NoDataAvlComponent,
+    loadChildren: './data-tree/data-tree.module#DataTreeModule',
+    // component: NoDataAvlComponent,
     pathMatch: 'full',
     canActivate: [ServerCheckGuard,AuthorizationGuard],
     data: { expectedAuthority: 'dataTree',title : 'DGA-Data Tree' }

@@ -140,6 +140,50 @@
 											</div>
 										</div>
 
+										<!-- new line added -->
+
+										<div class="col-md-3">
+											<div class="select-container dist-list text-center">
+												<div id="selectDistrict" class="input-group btn-group" dropdown>
+													<input type="text" [ngClass]="{'noBorder': areaLevelId == 5 }" placeholder="Municipals *" id="Munic" class="form-control not-visible-input"
+													 name="Munic" readonly="" [(ngModel)]="selectedMunicpal.areaName">
+													<div class="input-group-btn" style="position: relative;">
+														<button data-toggle="dropdown" dropdownToggle [disabled]="allMunicipals.length<=1" class="btn btn-color px-3  "
+														 type="button">
+														 <i class="fa fa-list"></i>
+														</button>
+														<ul class="dropdown-menu dropdown-menu-left" [ngStyle]="{'width.px': getWidth('selectDistrict')}" role="menu">
+
+															<li class="dropdown-item" *ngFor="let district of allMunicipals ;index as i " [ngClass]="{'allDistDropdown': i == 0}"
+															 (click)="resetPushpinDataCallDone(); selectedMunicpal(district)">{{district.areaName}}</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-3">
+											<div class="select-container dist-list text-center">
+												<div id="selectDistrict" class="input-group btn-group" dropdown>
+													<input type="text" [ngClass]="{'noBorder': areaLevelId == 6 }" placeholder="Words *" id="Dist" class="form-control not-visible-input"
+													 name="Word" readonly="" [(ngModel)]="selectedWord.areaName">
+													<div class="input-group-btn" style="position: relative;">
+														<button data-toggle="dropdown" dropdownToggle [disabled]="allWords.length<=1" class="btn btn-color px-3  "
+														 type="button">
+														 <i class="fa fa-list"></i>
+														</button>
+														<ul class="dropdown-menu dropdown-menu-left" [ngStyle]="{'width.px': getWidth('selectDistrict')}" role="menu">
+
+															<li class="dropdown-item" *ngFor="let district of allWords ;index as i " [ngClass]="{'allDistDropdown': i == 0}"
+															 (click)="resetPushpinDataCallDone(); selectedWord(district)">{{district.areaName}}</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<!-- end -->
+
 									</div>
 								</div>
 							</div>
@@ -147,9 +191,9 @@
 						<div class="">
 							<div class="" style="margin: 10px auto 25px;cursor: pointer;">
 								<div id="mapContainerId">
-									<div class="col-md-4 area_level" data-html2canvas-ignore="true" *ngIf="selectedParentSector.form_meta_id!=9 && selectedParentSector.form_meta_id!=10">
+									<div class="col-md-6 area_level" data-html2canvas-ignore="true" *ngIf="selectedParentSector.form_meta_id!=9 && selectedParentSector.form_meta_id!=10">
 										<ul class="list-unstyled list-inline arealist">
-											<li (click)="resetPushpinDataCallDone(); selectParentSector(parentSector)" *ngFor="let parentSector of parentSectors"><a
+											<li  (click)="resetPushpinDataCallDone(); selectParentSector(parentSector)" *ngFor="let parentSector of parentSectors" ><a *ngIf="parentSector.form_meta_id!=5"
 												 [ngClass]="{active:selectedParentSector.formId == parentSector.formId}" > <i class="{{parentSector.markerClass}}"></i>
 													{{parentSector.label}}
 												</a></li>

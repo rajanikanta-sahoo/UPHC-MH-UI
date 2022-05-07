@@ -28,6 +28,12 @@ export class DashboardService {
   {
     return this.httpClient.get(Constants.HOME_URL+'getAllDistrict?stateId='+stateId).toPromise()
   }
+
+  getAreas(id)
+  {
+    return this.httpClient.get(Constants.HOME_URL+'getAllAreasByParentId?id='+id).toPromise()
+  }
+
   getStateList()
   {
     return this.httpClient.get(Constants.HOME_URL+'getAllState').toPromise()
